@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .video-box {
+            padding: 10px;
+            margin: 10px;
+            width: 100%;
+            justify-content: center;
+            align-content: center;
+            align-items: center;
+            direction: ltr;
+        }
+
+        .col-xs-6 {
+            margin: 0px 10px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="video-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-4">
+                    <video class="first-video" width="300px" controls muted contenteditable="true" autoplay mediagroup="true" loop></video>
+                    <br>
+                    <button class="btn1 btn-primary">start</button>
+                </div>
+                <div class="col-xs-4">
+                    <video class="second-video" width="300px" controls muted contenteditable="true" autoplay mediagroup="true" loop></video>
+                    <br>
+                    <button class="btn2 btn-primary">start</button>
+                </div>
+                <div class="col-xs-4">
+                    <video class="share-video" width="300px" controls muted contenteditable="true" autoplay mediagroup="true" loop></video>
+                    <br>
+                    <button class="btn2 btn-primary">start</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        var btn1 = document.querySelector(".btn1")
+        var btn2 = document.querySelector(".btn2")
+
+        var first_video = document.querySelector(".first-video")
+        var second_video = document.querySelector(".second-video")
+        var sharevideo = document.querySelector(".share-video")
+
+        btn1.addEventListener("click", function() {
+            navigator.mediaDevices.getUserMedia({
+                audio: true,
+                video: {
+                    facingMode: {
+                        exact: "environment"
+                    }
+                }
+
+            }).then((strams) => {
+                first_video.srcObject = strams;
+                videoperam(strams)
+                console.log(strams)
+            })
+        })
+
+        function videoperam(strams) {
+            btn2.addEventListener("click", function() {
+                var plau_pause = second_video.srcObject = strams;
+                console.log(strams)
+                var videoid = strams.id;
+                console.log(videoid)
+            })
+        }
+
+        navigator.mediaDevices.getDisplayMedia({
+            video: true,
+            audio: true
+        }).then((res) => {
+
+            sharevideo.srcObject = res
+        })
+
+    </script>
+
+    <input type="file" accept="video/*" capture="camera" id="recorder" />
+    <video id="player" controls></video>
+    <script>
+        var recorder = document.getElementById('recorder');
+        var player = document.getElementById('player');
+
+        recorder.addEventListener('change', function(e) {
+            var file = e.target.files[0];
+            // Do something with the video file.
+            player.src = URL.createObjectURL(file);
+            console.log(URL.createObjectURL(file))
+        });
+        console.info("Track settings:");
+
+    </script>
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+
+</html>
